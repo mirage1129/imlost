@@ -1,11 +1,13 @@
-<%= form_for @changeset, @action, fn f -> %>
+
+<h1>Create Class</h1>
+
+<%= form_for @changeset, Routes.class_path(@conn, :create), fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
-  <%= label f, :name %>
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
 
@@ -13,3 +15,5 @@
     <%= submit "Save" %>
   </div>
 <% end %>
+
+
