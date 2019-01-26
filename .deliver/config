@@ -1,4 +1,4 @@
-APP="imlost"
+APP="imlost_api"
 
 BUILD_HOST="kunvince.com"
 BUILD_USER="deploy"
