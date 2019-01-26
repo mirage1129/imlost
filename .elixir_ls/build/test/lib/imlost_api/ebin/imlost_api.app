@@ -20,5 +20,5 @@
                         'Elixir.ImlostApiWeb.Router.Helpers',
                         'Elixir.ImlostApiWeb.UserSocket']},
               {registered,[]},
-              {vsn,"0.1.0"},
+              {vsn,"0.1.1"},
               {mod,{'Elixir.ImlostApi.Application',[]}}]}.
