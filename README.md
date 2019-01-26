@@ -119,3 +119,4 @@ References
 8.  Git commands
     a. Reset changes since last commit
             - `git reset HEAD --hard`
+
