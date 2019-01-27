@@ -20,6 +20,8 @@ i. Phoenix channels
 j. React / Phoenix integration 
   - https://medium.com/@resir014/a-phoenix-react-initial-setup-that-actually-works-c943e48f1e9e
 
+
+
 1.  Set up automated deployment
   a. Configure DNS
     i. Point Google Domain to Cloudflare - Cloudflare gives us the names of 2 name servers that we can plug into Google Domains (where we bought the domain) so that Google knows that Cloudflare will be taking over the routing when people hit the domain name.
