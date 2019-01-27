@@ -2,10 +2,11 @@ defmodule ImlostApiWeb.ClassController do
   use ImlostApiWeb, :controller
 
   alias ImlostApi.Classrooms
-  alias ImlostApi.Classrooms.Class
+  alias ImlostApi.Accounts
 
   def index(conn, params) do
     class = Classrooms.get_class_by_name(params)
+    Accounts.create_user(class)
     render(conn, "show.html", class: class)
   end
 

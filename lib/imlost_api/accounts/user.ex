@@ -10,9 +10,10 @@ defmodule ImlostApi.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(user, class, attrs) do
     user
     |> cast(attrs, [])
     |> validate_required([])
+    |> put_assoc(:class, class)
   end
 end
