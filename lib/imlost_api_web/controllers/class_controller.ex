@@ -5,8 +5,8 @@ defmodule ImlostApiWeb.ClassController do
   alias ImlostApi.Classrooms.Class
 
   def index(conn, params) do
-    classes = Classrooms.list_classes(params)
-    render(conn, "index.html", classes: classes)
+    class = Classrooms.get_class_by_name(params)
+    render(conn, "show.html", class: class)
   end
 
   def create(conn, %{"class" => class_params}) do

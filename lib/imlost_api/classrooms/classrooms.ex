@@ -7,12 +7,12 @@ defmodule ImlostApi.Classrooms do
   alias ImlostApi.Repo
   alias ImlostApi.Classrooms.Class
 
-  def list_classes(params) do
+  def get_class_by_name(params) do
     search_term = get_in(params, ["query"])
 
     Class
     |> Class.search(search_term)
-    |> Repo.all()
+    |> Repo.one()
   end
 
   def search(query, search_term) do
