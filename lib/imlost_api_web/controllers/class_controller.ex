@@ -4,9 +4,9 @@ defmodule ImlostApiWeb.ClassController do
   alias ImlostApi.Classrooms
   alias ImlostApi.Classrooms.Class
 
-  def index(conn, _params) do
-    changeset = Classrooms.change_class(%Class{})
-    render(conn, "index.html", changeset: changeset)
+  def index(conn, params) do
+    classes = Classrooms.list_classes(params)
+    render(conn, "index.html", classes: classes)
   end
 
   def create(conn, %{"class" => class_params}) do

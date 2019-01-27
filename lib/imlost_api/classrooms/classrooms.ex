@@ -5,15 +5,14 @@ defmodule ImlostApi.Classrooms do
 
   import Ecto.Query, warn: false
   alias ImlostApi.Repo
-
   alias ImlostApi.Classrooms.Class
 
-  def get_class_by_name!(class_params) do
-  search_term = get_in(class_params, ["query"])
+  def list_classes(params) do
+    search_term = get_in(params, ["query"])
 
-  Class
-  |> Class.search(search_term)
-  |> Repo.one!()
+    Class
+    |> Class.search(search_term)
+    |> Repo.all()
   end
 
   def search(query, search_term) do
@@ -21,10 +20,6 @@ defmodule ImlostApi.Classrooms do
 
     from class in query,
     where: ilike(class.name, ^wildcard_search)
-  end
-
-  def list_classes do
-    Repo.all(Class)
   end
 
   def get_class!(id), do: Repo.get!(Class, id)
