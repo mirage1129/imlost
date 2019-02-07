@@ -16,6 +16,7 @@
                         'Elixir.ImlostApiWeb.LayoutView',
                         'Elixir.ImlostApiWeb.PageController',
                         'Elixir.ImlostApiWeb.PageView',
+                        'Elixir.ImlostApiWeb.QuestionChannel',
                         'Elixir.ImlostApiWeb.Router',
                         'Elixir.ImlostApiWeb.Router.Helpers',
                         'Elixir.ImlostApiWeb.UserSocket']},
