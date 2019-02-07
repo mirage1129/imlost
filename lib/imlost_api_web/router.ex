@@ -15,8 +15,8 @@ defmodule ImlostApiWeb.Router do
 
   scope "/", ImlostApiWeb do
     pipe_through :browser
-
     get "/", PageController, :index
+    resources "/classes", ClassController, only: [:index, :create, :show]
   end
 
   # Other scopes may use custom stacks.
