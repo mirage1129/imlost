@@ -23,6 +23,7 @@
                         'Elixir.ImlostApiWeb.LayoutView',
                         'Elixir.ImlostApiWeb.PageController',
                         'Elixir.ImlostApiWeb.PageView',
+                        'Elixir.ImlostApiWeb.QuestionChannel',
                         'Elixir.ImlostApiWeb.QuestionController',
                         'Elixir.ImlostApiWeb.QuestionView',
                         'Elixir.ImlostApiWeb.Router',
