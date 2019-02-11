@@ -8,7 +8,7 @@ defmodule ImlostApiWeb.ClassController do
   def index(conn, params) do
     class = Classrooms.get_class_by_name(params)
     Accounts.create_user(class)
-    render(conn, "show.html", class: class)
+    render(conn, "show.json", class: class)
   end
 
   def create(conn, %{"class" => class_params}) do
@@ -20,13 +20,14 @@ defmodule ImlostApiWeb.ClassController do
         |> redirect(to: Routes.class_path(conn, :show, class))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.json", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     class = Classrooms.get_class!(id)
     changeset = Classrooms.change_question(%Question{})
-    render(conn, "show.html", class: class, changeset: changeset)
+    render(conn, "show.json", class: class, changeset: changeset)
   end
+
 end
