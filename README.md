@@ -18,8 +18,11 @@ h. Nested routes
 i. Phoenix channels 
   - https://timber.io/blog/building-a-real-time-app-with-phoenix/ - http://whatdidilearn.info/2018/03/04/using-channels-in-phoenix.html
 j. React / Phoenix integration 
-  - https://medium.com/@resir014/a-phoenix-react-initial-setup-that-actually-works-c943e48f1e9e
-
+- setup using this: http://www.petecorey.com/blog/2017/04/03/using-create-react-app-with-phoenix/
+ NOTE: Make sure to add {:plug_static_index_html, "~> 1.0"} to your dependencies when you get to the  plug Plug.Static.IndexHtml part. (https://hexdocs.pm/plug_static_index_html/readme.html#content)
+- Then use this to make API calls 
+https://medium.com/coding-artist/full-stack-react-with-phoenix-chapter-6-creating-a-postgresql-api-service-9f2775161d3f
+You have to build each time to see the React app in localhost because the endpoint is pulling from the build folder
 
 
 1.  Set up automated deployment

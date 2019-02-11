@@ -11,16 +11,7 @@ defmodule ImlostApiWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  resources "/classes", ClassController, only: [:index, :create, :show]
   end
 
-  scope "/", ImlostApiWeb do
-    pipe_through :browser
-    get "/", PageController, :index
-    resources "/classes", ClassController, only: [:index, :create, :show]
-  end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", ImlostApiWeb do
-  #   pipe_through :api
-  # end
 end

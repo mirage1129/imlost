@@ -2,7 +2,7 @@
              [{applications,[kernel,stdlib,elixir,logger,runtime_tools,
                              gettext,jason,phoenix_pubsub,postgrex,ecto_sql,
                              distillery,edeliver,phoenix_html,plug_cowboy,
-                             phoenix,phoenix_ecto]},
+                             phoenix,plug_static_index_html,phoenix_ecto]},
               {description,"imlost_api"},
               {modules,['Elixir.ImlostApi','Elixir.ImlostApi.Accounts',
                         'Elixir.ImlostApi.Accounts.User',
