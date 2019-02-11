@@ -8,10 +8,10 @@ class CreateClassInput extends React.Component {
     return (
       <div className="field has-addons">
         <div className="control">
-          <input className="input" type="text" placeholder="Find a class" />
+          <input className="input is-expanded" type="text" placeholder="Create a class" />
         </div>
         <div className="control">
-          <a className="button is-info">Search</a>
+          <a className="button is-info">Create</a>
         </div>
       </div>
     )

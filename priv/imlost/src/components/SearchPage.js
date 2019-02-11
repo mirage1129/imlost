@@ -11,15 +11,14 @@ class SearchPage extends React.Component {
     return (
       <body>
         <section className="section">
-          <div className="container">
-            <h1 className="title">Section</h1>
-            <h2 className="subtitle">
-              A simple container to divide your page into <strong>sections</strong>, like the one you're currently
-              reading
-            </h2>
+          <div className="container has-text-centered">
+            <div className="columns is-centered">
+              <div className="column is-3">
+                <SearchInput />
+                <CreateClassInput />
+              </div>
+            </div>
           </div>
-          <SearchInput />
-          <CreateClassInput />
         </section>
       </body>
     )
