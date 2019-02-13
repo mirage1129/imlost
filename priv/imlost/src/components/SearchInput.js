@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 class SearchInput extends React.Component {
@@ -7,14 +8,9 @@ class SearchInput extends React.Component {
     super()
     this.state = {
       name: '',
-      toClassroom: false,
       classroom: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentWillMount() {
-    //add API request
   }
 
   handleSubmit(event) {
@@ -23,6 +19,7 @@ class SearchInput extends React.Component {
       .get('http://localhost:4000/api/' + this.state.name)
       .then(response => {
         this.setState({ classroom: response.data.class })
+        this.props.history.push('/class')
         console.log(this.state)
       })
       .catch(error => {
@@ -35,30 +32,29 @@ class SearchInput extends React.Component {
   }
 
   render() {
-    // if (this.state.toClassroom === true) {
-    //   // <Redirect to={'/' + this.state.name} />
-    // }
-
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className="field has-addons">
-          <div className="control">
-            <input
-              className="input is-expanded"
-              type="text"
-              placeholder="Find a class"
-              value={this.state.value}
-              onChange={this.handleName.bind(this)}
-            />
+      <div>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <div className="field has-addons">
+            <div className="control">
+              <input
+                className="input is-expanded"
+                type="text"
+                placeholder="Find a class"
+                value={this.state.value}
+                onChange={this.handleName.bind(this)}
+              />
+            </div>
+            <div className="control">
+              <button type="submit" value="Submit" className="button is-primary">
+                Search
+              </button>
+            </div>
           </div>
-          <div className="control">
-            <button type="submit" value="Submit" className="button is-primary">
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     )
   }
 }
-export default SearchInput
+
+export default withRouter(SearchInput)
