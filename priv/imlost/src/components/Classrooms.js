@@ -6,7 +6,7 @@ class Classrooms extends React.Component {
   }
   render() {
     //create an input for search
-    return <div>Classroom</div>
+    return <div>{this.props.location.state.classroom.name}</div>
   }
 }
 export default Classrooms

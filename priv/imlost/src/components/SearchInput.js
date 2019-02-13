@@ -18,8 +18,11 @@ class SearchInput extends React.Component {
     axios
       .get('http://localhost:4000/api/' + this.state.name)
       .then(response => {
-        this.setState({ classroom: response.data.class })
-        this.props.history.push('/class')
+        // this.setState({ classroom: response.data.class })
+        this.props.history.push({
+          pathname: '/class',
+          state: { classroom: response.data.class },
+        })
         console.log(this.state)
       })
       .catch(error => {
