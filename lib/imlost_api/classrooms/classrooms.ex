@@ -7,6 +7,10 @@ defmodule ImlostApi.Classrooms do
   alias ImlostApi.Repo
   alias ImlostApi.Classrooms.Class
 
+  def list_classes do
+    Repo.all(Class)
+  end
+
   def get_class_by_name(params) do
     search_term = get_in(params, ["query"])
 

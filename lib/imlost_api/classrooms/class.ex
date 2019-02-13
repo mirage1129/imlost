@@ -15,6 +15,7 @@ defmodule ImlostApi.Classrooms.Class do
     class
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> unique_constraint(:name)
   end
 
   def search(query, search_term) do

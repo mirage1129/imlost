@@ -5,29 +5,19 @@ defmodule ImlostApiWeb.ClassController do
   alias ImlostApi.Classrooms.Question
   alias ImlostApi.Accounts
 
-  def index(conn, params) do
-    class = Classrooms.get_class_by_name(params)
-    Accounts.create_user(class)
-    render(conn, "show.json", class: class)
-  end
-
   def create(conn, %{"class" => class_params}) do
     case Classrooms.create_class(class_params) do
       {:ok, class} ->
         Accounts.create_user(class)
-        conn
-        |> put_flash(:info, "Class created successfully.")
-        |> redirect(to: Routes.class_path(conn, :show, class))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.json", changeset: changeset)
+        # IO.puts(class.id)
+        render conn, "show.json", id: class.id
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    class = Classrooms.get_class!(id)
-    changeset = Classrooms.change_question(%Question{})
-    render(conn, "show.json", class: class, changeset: changeset)
+  def show(conn, params) do
+    class = Classrooms.get_class_by_name(params)
+    Accounts.create_user(class)
+    render(conn, "show.json", class: class)
   end
 
 end
