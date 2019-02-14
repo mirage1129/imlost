@@ -40,7 +40,7 @@ class CreateClassInput extends React.Component {
             />
           </div>
           <div className="control">
-            <button type="submit" value="Create" className="button is-primary">
+            <button type="submit" value="Create" className="button is-danger">
               Create
             </button>
           </div>

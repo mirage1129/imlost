@@ -43,13 +43,13 @@ class SearchInput extends React.Component {
               <input
                 className="input is-expanded"
                 type="text"
-                placeholder="Find a class"
+                placeholder="Search for a class"
                 value={this.state.value}
                 onChange={this.handleName.bind(this)}
               />
             </div>
             <div className="control">
-              <button type="submit" value="Submit" className="button is-primary">
+              <button type="submit" value="Submit" className="button is-success">
                 Search
               </button>
             </div>

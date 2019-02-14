@@ -8,10 +8,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path="/" component={SearchPage} />
-          <Route path="/:class" component={Classrooms} />
-        </div>
+        <section class="hero is-info is-fullheight">
+          <div class="hero-body">
+            <div class="container">
+              <Route exact path="/" component={SearchPage} />
+              <Route path="/:class" component={Classrooms} />
+            </div>
+          </div>
+        </section>
       </Router>
     )
   }
