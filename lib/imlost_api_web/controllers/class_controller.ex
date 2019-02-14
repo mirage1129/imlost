@@ -9,8 +9,7 @@ defmodule ImlostApiWeb.ClassController do
     case Classrooms.create_class(class_params) do
       {:ok, class} ->
         Accounts.create_user(class)
-        # IO.puts(class.id)
-        render conn, "show.json", id: class.id
+        render(conn, "show.json", class: class)
     end
   end
 

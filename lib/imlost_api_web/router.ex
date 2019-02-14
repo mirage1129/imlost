@@ -15,7 +15,8 @@ defmodule ImlostApiWeb.Router do
 
   scope "/api", ImlostApiWeb do
     pipe_through :api
-    resources "/classes", ClassController, only: [:create]
+
+    post "/classes", ClassController, :create
     get "/:query", ClassController, :show
 
   end

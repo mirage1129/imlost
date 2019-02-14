@@ -11,6 +11,7 @@ class Classrooms extends React.Component {
   }
   componentWillMount() {
     //add API request
+    console.log(this.props.location.state)
   }
   render() {
     //create an input for search

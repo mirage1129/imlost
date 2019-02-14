@@ -1,52 +1,65 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 class CreateClassInput extends React.Component {
   constructor() {
     super()
     this.state = {
-      name: '',
+      className: '',
+      classroom: '',
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    //   console.log(this.state)
-    // }
-
-    axios.post('http://localhost:4000/api/classes', {
-      headers: { 'Content-Type': 'application/json' },
-      class: {
-        name: this.state.name,
-      },
-    })
+    axios
+      .post('http://localhost:4000/api/classes', {
+        class: {
+          name: this.state.className,
+        },
+      })
+      .then(response => {
+        console.log(response.data)
+        this.setState({ classroom: response.data.class })
+        this.props.history.push({
+          pathname: '/' + this.state.classroom.name,
+          state: { classroom: this.state.classroom },
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
-  handleName(event) {
-    this.setState({ name: event.target.value })
+  handleClassName(event) {
+    this.setState({ className: event.target.value })
   }
 
   render() {
-    //create an input for search
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className="field has-addons">
-          <div className="control">
-            <input
-              className="input is-expanded"
-              type="text"
-              placeholder="Create a class"
-              value={this.state.value}
-              onChange={this.handleName.bind(this)}
-            />
+      <div>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <div className="field has-addons">
+            <div className="control">
+              <input
+                className="input is-expanded"
+                type="text"
+                placeholder="Create a class"
+                value={this.state.value}
+                onChange={this.handleClassName.bind(this)}
+              />
+            </div>
+            <div className="control">
+              <button type="submit" value="Submit" className="button is-danger">
+                Create
+              </button>
+            </div>
           </div>
-          <div className="control">
-            <button type="submit" value="Create" className="button is-danger">
-              Create
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     )
   }
 }
-export default CreateClassInput
+
+export default withRouter(CreateClassInput)

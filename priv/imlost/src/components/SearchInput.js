@@ -6,7 +6,7 @@ class SearchInput extends React.Component {
   constructor() {
     super()
     this.state = {
-      name: '',
+      classQuery: '',
       classroom: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,12 +15,12 @@ class SearchInput extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     axios
-      .get('http://localhost:4000/api/' + this.state.name)
+      .get('http://localhost:4000/api/' + this.state.classQuery)
       .then(response => {
-        // this.setState({ classroom: response.data.class })
+        this.setState({ classroom: response.data.class })
         this.props.history.push({
-          pathname: '/class',
-          state: { classroom: response.data.class },
+          pathname: '/' + this.state.classroom.name,
+          state: { classroom: this.state.classroom },
         })
         console.log(this.state)
       })
@@ -29,8 +29,8 @@ class SearchInput extends React.Component {
       })
   }
 
-  handleName(event) {
-    this.setState({ name: event.target.value })
+  handleClassQuery(event) {
+    this.setState({ classQuery: event.target.value })
   }
 
   render() {
@@ -44,7 +44,7 @@ class SearchInput extends React.Component {
                 type="text"
                 placeholder="Search for a class"
                 value={this.state.value}
-                onChange={this.handleName.bind(this)}
+                onChange={this.handleClassQuery.bind(this)}
               />
             </div>
             <div className="control">
