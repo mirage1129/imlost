@@ -6,11 +6,11 @@ class QuestionSubmit extends React.Component {
       <div>
         <form method="POST" action={'/' + this.props.classname}>
           <div className="control">
-            <textarea className="textarea" name="question" type="text" placeholder="type in your question" />
+            <textarea className="textarea" name="question" type="text" placeholder="type your question" />
           </div>
           <br />
           <p className="control">
-            <input className="button is-info" value="post question" type="submit" />
+            <input className="button is-info" value="post" type="submit" />
           </p>
         </form>
       </div>

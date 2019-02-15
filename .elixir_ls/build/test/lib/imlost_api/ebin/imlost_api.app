@@ -26,6 +26,7 @@
                         'Elixir.ImlostApiWeb.QuestionChannel',
                         'Elixir.ImlostApiWeb.QuestionController',
                         'Elixir.ImlostApiWeb.QuestionView',
+                        'Elixir.ImlostApiWeb.RoomChannel',
                         'Elixir.ImlostApiWeb.Router',
                         'Elixir.ImlostApiWeb.Router.Helpers',
                         'Elixir.ImlostApiWeb.UserController',

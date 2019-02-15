@@ -2,7 +2,7 @@ defmodule ImlostApiWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ImlostApiWeb.RoomChannel
+  channel "room:*", ImlostApiWeb.RoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
