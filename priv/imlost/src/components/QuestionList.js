@@ -1,6 +1,7 @@
 import React from 'react'
 import { Socket } from 'phoenix'
 import Question from './Question'
+import ServerQuestion from './ServerQuestion'
 import QuestionSubmit from './QuestionSubmit'
 
 class QuestionList extends React.Component {
@@ -8,8 +9,7 @@ class QuestionList extends React.Component {
     super()
     this.state = {
       inputQuestion: '',
-      userQuestions: [],
-      serverQuestions: [],
+      questions: [],
     }
 
     let socket = new Socket('/socket', { params: { token: window.userToken } })
@@ -24,7 +24,7 @@ class QuestionList extends React.Component {
     this.channel.on('new_msg', payload => {
       console.log(payload)
       this.setState({
-        serverQuestions: this.state.serverQuestions.concat(payload.body),
+        questions: this.state.questions.concat(payload.body),
       })
     })
   }
@@ -39,13 +39,19 @@ class QuestionList extends React.Component {
     event.preventDefault()
     this.channel.push('new_msg', { body: this.state.inputQuestion })
     this.setState({
-      userQuestions: this.state.userQuestions.concat(this.state.inputQuestion),
+      questions: this.state.questions.concat(this.state.inputQuestion),
       inputQuestion: '',
     })
   }
 
   render() {
-    const userQuestions = this.state.userQuestions.map((message, index) => <Question key={index} message={message} />)
+    const questions = this.state.questions.map((question, index) => {
+      if (index % 2 == 0) {
+        return <Question key={index} message={question} />
+      } else {
+        return <ServerQuestion key={index} message={question} />
+      }
+    })
 
     return (
       <div className="box">
@@ -99,7 +105,7 @@ class QuestionList extends React.Component {
               width: '100%',
             }}
           >
-            {userQuestions}
+            {questions}
           </div>
         </div>
 
