@@ -1,7 +1,6 @@
 import React from 'react'
 import { Socket } from 'phoenix'
 import Question from './Question'
-import ServerQuestion from './ServerQuestion'
 import QuestionSubmit from './QuestionSubmit'
 
 class QuestionList extends React.Component {
@@ -39,18 +38,15 @@ class QuestionList extends React.Component {
     event.preventDefault()
     this.channel.push('new_msg', { body: this.state.inputQuestion })
     this.setState({
-      questions: this.state.questions.concat(this.state.inputQuestion),
+      // questions: this.state.questions.concat(this.state.inputQuestion),
       inputQuestion: '',
     })
+    console.log(this.state)
   }
 
   render() {
     const questions = this.state.questions.map((question, index) => {
-      if (index % 2 == 0) {
-        return <Question key={index} message={question} />
-      } else {
-        return <ServerQuestion key={index} message={question} />
-      }
+      return <Question key={index} message={question} />
     })
 
     return (
