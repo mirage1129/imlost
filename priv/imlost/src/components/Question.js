@@ -22,7 +22,7 @@ class Question extends React.Component {
               <nav className="level is-mobile">
                 <div className="level-left">
                   <p>
-                    This is a question that someone is asking.
+                    {this.props.message}
                     <br />
                     <small>
                       <a className="has-text-info">3 answers</a> · <a className="has-text-info">1 followup</a>
