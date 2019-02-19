@@ -8,16 +8,24 @@ class QuestionList extends React.Component {
     super()
     this.state = {
       inputQuestion: '',
-      listOfQuestions: [],
+      userQuestions: [],
+      serverQuestions: [],
     }
+
+    let socket = new Socket('/socket', { params: { token: window.userToken } })
+    socket.connect()
+    this.channel = socket.channel('class:lobby', {})
   }
 
   componentDidMount() {
-    let socket = new Socket('/socket', { params: { token: window.userToken } })
-    socket.connect()
-    let channel = socket.channel('class:lobby', {})
-    channel.join().receive('ok', response => {
+    this.channel.join().receive('ok', response => {
       console.log('Joined successfully', response)
+    })
+    this.channel.on('new_msg', payload => {
+      console.log(payload)
+      this.setState({
+        serverQuestions: this.state.serverQuestions.concat(payload.body),
+      })
     })
   }
 
@@ -29,15 +37,15 @@ class QuestionList extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    this.channel.push('new_msg', { body: this.state.inputQuestion })
     this.setState({
-      listOfQuestions: this.state.listOfQuestions.concat(this.state.inputQuestion),
+      userQuestions: this.state.userQuestions.concat(this.state.inputQuestion),
+      inputQuestion: '',
     })
   }
 
   render() {
-    const listOfQuestions = this.state.listOfQuestions.map((message, index) => (
-      <Question key={index} message={message} />
-    ))
+    const userQuestions = this.state.userQuestions.map((message, index) => <Question key={index} message={message} />)
 
     return (
       <div className="box">
@@ -91,7 +99,7 @@ class QuestionList extends React.Component {
               width: '100%',
             }}
           >
-            {listOfQuestions}
+            {userQuestions}
           </div>
         </div>
 
