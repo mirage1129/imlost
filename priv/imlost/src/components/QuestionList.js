@@ -4,8 +4,8 @@ import Question from './Question'
 import QuestionSubmit from './QuestionSubmit'
 
 class QuestionList extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       inputQuestion: '',
       questions: [],
@@ -13,19 +13,25 @@ class QuestionList extends React.Component {
 
     let socket = new Socket('/socket', { params: { token: window.userToken } })
     socket.connect()
-    this.channel = socket.channel('class:lobby', {})
+    let channelClassId = this.props.classroomId
+    if (channelClassId) {
+      this.channel = socket.channel(`class:${channelClassId}`, {})
+    }
   }
 
   componentDidMount() {
-    this.channel.join().receive('ok', response => {
-      console.log('Joined successfully', response)
-    })
-    this.channel.on('new_msg', payload => {
-      console.log(payload)
-      this.setState({
-        questions: this.state.questions.concat(payload.body),
+    let channelClassId = this.props.classroomId
+    if (channelClassId) {
+      this.channel.join().receive('ok', response => {
+        console.log('Joined successfully', response)
+        // console.log(this.props.classroomId)
       })
-    })
+      this.channel.on(`class:${channelClassId}:new_msg`, payload => {
+        this.setState({
+          questions: this.state.questions.concat(payload.body),
+        })
+      })
+    }
   }
 
   handleInputQuestion(event) {
@@ -36,12 +42,13 @@ class QuestionList extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.channel.push('new_msg', { body: this.state.inputQuestion })
-    this.setState({
-      // questions: this.state.questions.concat(this.state.inputQuestion),
-      inputQuestion: '',
-    })
-    console.log(this.state)
+    let channelClassId = this.props.classroomId
+    if (channelClassId) {
+      this.channel.push('new_msg', { body: this.state.inputQuestion })
+      this.setState({
+        inputQuestion: '',
+      })
+    }
   }
 
   render() {
@@ -52,9 +59,8 @@ class QuestionList extends React.Component {
     return (
       <div className="box">
         <h1 className="is-size-3">Questions</h1>
+        <h1 className="is-size-3">{this.props.classroomName}</h1>
         <br />
-
-        {/* TESTING */}
 
         <div>
           <form onSubmit={this.handleSubmit.bind(this)}>
@@ -104,10 +110,6 @@ class QuestionList extends React.Component {
             {questions}
           </div>
         </div>
-
-        {/* TESTING */}
-
-        {/* <Question /> */}
         {/* <QuestionSubmit /> */}
       </div>
     )

@@ -4,17 +4,18 @@ import QuestionList from './QuestionList'
 class Classrooms extends React.Component {
   constructor() {
     super()
-    this.state = {
-      name: 'wyoming',
-      classroom: '',
-    }
+    this.state = {}
   }
+
   componentWillMount() {
     //add API request
     console.log(this.props.location.state)
   }
+
   render() {
-    //create an input for search
+    const classroomName = this.props.location.state.classroom.name
+    const classroomId = this.props.location.state.classroom.id
+
     return (
       <div>
         <div className="columns is-vcentered">
@@ -24,7 +25,7 @@ class Classrooms extends React.Component {
             </figure>
           </div>
           <div className="column">
-            <QuestionList />
+            <QuestionList classroomName={classroomName} classroomId={classroomId} />
           </div>
         </div>
       </div>
