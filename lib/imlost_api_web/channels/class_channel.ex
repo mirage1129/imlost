@@ -5,10 +5,9 @@ defmodule ImlostApiWeb.ClassChannel do
     {:ok, %{channel: "class:#{class_id}"}, assign(socket, :class_id, class_id)}
   end
 
-  def handle_in("new_msg", %{"body" => body}, socket) do
-    # broadcast socket, "new_msg", %{body: body}
+def handle_in("new_question", %{"body" => body}, socket) do
     class_id = socket.assigns[:class_id]
-    broadcast!(socket, "class:#{class_id}:new_msg", %{body: body})
+    broadcast!(socket, "class:#{class_id}:new_question", %{body: body})
     {:noreply, socket}
   end
 

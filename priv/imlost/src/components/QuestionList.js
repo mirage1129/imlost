@@ -24,9 +24,8 @@ class QuestionList extends React.Component {
     if (channelClassId) {
       this.channel.join().receive('ok', response => {
         console.log('Joined successfully', response)
-        // console.log(this.props.classroomId)
       })
-      this.channel.on(`class:${channelClassId}:new_msg`, payload => {
+      this.channel.on(`class:${channelClassId}:new_question`, payload => {
         this.setState({
           questions: this.state.questions.concat(payload.body),
         })
@@ -44,7 +43,7 @@ class QuestionList extends React.Component {
     event.preventDefault()
     let channelClassId = this.props.classroomId
     if (channelClassId) {
-      this.channel.push('new_msg', { body: this.state.inputQuestion })
+      this.channel.push('new_question', { body: this.state.inputQuestion })
       this.setState({
         inputQuestion: '',
       })
