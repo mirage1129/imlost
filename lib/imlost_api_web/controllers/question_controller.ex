@@ -16,7 +16,8 @@ defmodule ImlostApiWeb.QuestionController do
   end
 
   def new(conn, _params, class) do
-    changeset = Classrooms.change_question(%Question{class_id:class.id})
+    # changeset = Classrooms.change_question(%Question{class_id: class.id})
+    changeset = Classrooms.change_question(%Question{})
     render(conn, "new.html", changeset: changeset, class: class)
   end
 
