@@ -14,7 +14,7 @@ defmodule ImlostApi.Classrooms.Question do
   @doc false
   def changeset(question, attrs) do
     question
-    |> cast(attrs, [:content])
-    |> validate_required([:content])
+    |> cast(attrs, [:content, :class_id])
+    |> validate_required([:content, :class_id])
   end
 end
