@@ -7,6 +7,7 @@ defmodule ImlostApi.Classrooms.Question do
     field :content, :string
     field :upvotes, :integer, default: 0
     belongs_to :user, ImlostApi.Accounts.User
+    belongs_to :class, ImlostApi.Accounts.Class
 
     timestamps()
   end

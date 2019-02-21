@@ -7,6 +7,7 @@ defmodule ImlostApi.Classrooms.Class do
   schema "classes" do
     field :name, :string
     has_many :user, ImlostApi.Accounts.User
+    has_many :question, ImlostApi.Accounts.Question
     timestamps()
   end
 

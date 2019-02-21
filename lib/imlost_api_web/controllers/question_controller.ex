@@ -12,24 +12,21 @@ defmodule ImlostApiWeb.QuestionController do
 
   def index(conn, _params, class) do
     questions = Classrooms.list_questions(class)
-    render(conn, "index.html", questions: questions, class: class)
+    render(conn, "index.json", questions: questions, class: class)
   end
 
-  def new(conn, _params, class) do
-    # changeset = Classrooms.change_question(%Question{class_id: class.id})
-    changeset = Classrooms.change_question(%Question{})
-    render(conn, "new.html", changeset: changeset, class: class)
-  end
+  # def new(conn, _params, class) do
+  #   changeset = Classrooms.change_question(%Question{class_id: class.id})
+  #   render(conn, "new.html", changeset: changeset, class: class)
+  # end
 
-  def create(conn, %{"question" => question_params}, class) do
+  def create(conn, %{"question" => question_params}, class_id) do
+    question_params = question_params |> Map.put("class_id", class_id)
+
     case Classrooms.create_question(question_params) do
       {:ok, question} ->
-        conn
-        |> put_flash(:info, "Question created successfully.")
-        |> redirect(to: Routes.question_path(conn, :show, question, class))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, class: class)
+        questions = Classrooms.list_questions(class_id)
+        render(conn, "index.json", questions: questions, class: class_id)
     end
   end
 

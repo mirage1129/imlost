@@ -1,6 +1,7 @@
 import React from 'react'
 import { Socket } from 'phoenix'
 import Question from './Question'
+import axios from 'axios'
 import QuestionSubmit from './QuestionSubmit'
 
 class QuestionList extends React.Component {
@@ -20,6 +21,20 @@ class QuestionList extends React.Component {
   }
 
   componentDidMount() {
+    // axios
+    //   .get('http://localhost:4000/api/' + this.state.classQuery)
+    //   .then(response => {
+    //     this.setState({ classroom: response.data.class })
+    //     this.props.history.push({
+    //       pathname: '/' + this.state.classroom.name,
+    //       state: { classroom: this.state.classroom },
+    //     })
+    //     console.log(this.state)
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+
     let channelClassId = this.props.classroomId
     if (channelClassId) {
       this.channel.join().receive('ok', response => {

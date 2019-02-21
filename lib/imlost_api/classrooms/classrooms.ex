@@ -50,9 +50,9 @@ defmodule ImlostApi.Classrooms do
 
   alias ImlostApi.Classrooms.Question
 
-  def list_questions(class) do
+  def list_questions(class_id) do
     Question
-    |> where([q], q.class_id == ^class.id)
+    |> where([q], q.class_id == ^class_id)
     |> Repo.all
   end
 
