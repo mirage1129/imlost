@@ -21,21 +21,19 @@ class QuestionList extends React.Component {
   }
 
   componentDidMount() {
-    // axios
-    //   .get('http://localhost:4000/api/' + this.state.classQuery)
-    //   .then(response => {
-    //     this.setState({ classroom: response.data.class })
-    //     this.props.history.push({
-    //       pathname: '/' + this.state.classroom.name,
-    //       state: { classroom: this.state.classroom },
-    //     })
-    //     console.log(this.state)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
-
     let channelClassId = this.props.classroomId
+    axios
+      .get('http://localhost:4000/api/' + channelClassId + '/questions')
+      .then(response => {
+        let questionArray = response.data.questions
+        let questionMerge = questionArray.map(q => q.message)
+        this.setState({ questions: this.state.questions.concat(questionMerge) })
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+
     if (channelClassId) {
       this.channel.join().receive('ok', response => {
         console.log('Joined successfully', response)
@@ -73,7 +71,6 @@ class QuestionList extends React.Component {
     return (
       <div className="box">
         <h1 className="is-size-3">Questions</h1>
-        <h1 className="is-size-3">{this.props.classroomName}</h1>
         <br />
 
         <div>
